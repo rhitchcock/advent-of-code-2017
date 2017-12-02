@@ -1,13 +1,10 @@
-import sys
+#!/usr/bin/env python3
 
-if __name__ == "__main__":
-  if len(sys.argv) < 2:
-    print("Usage: " + sys.argv[0] + " <code>")
-  else:
-    code = sys.argv[1]
-    total = 0
-    for i in range(0, len(code)):
-      if code[i] == code[int(i + len(code) / 2) % len(code)]:
-        total += int(code[i])
-    print(total)
+total = 0
+with open("input.txt") as f:
+  code = f.readline().split()[0]
+  for i in range(0, len(code)):
+    if code[i] == code[int(i + len(code) / 2) % len(code)]:
+      total += int(code[i])
+print(total)
 
