@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 
-def divide(row):
-  for i in range(0, len(row)):
-    for j in range(i + 1, len(row)):
-      if row[i] % row[j] == 0:
-        return row[i] / row[j]
-      elif row[j] % row[i] == 0:
-        return row[j] / row[i]
+def divide(r):
+  for i in range(0, len(r)):
+    for j in range(i + 1, len(r)):
+      if r[i] % r[j] == 0:
+        return int(r[i] / r[j])
+      elif r[j] % r[i] == 0:
+        return int(r[j] / r[i])
 
-checksum = 0
+c = 0
 with open("input.txt") as f:
   for l in f.readlines():
-    checksum += divide([int(i) for i in l.split()])
-print(checksum)
+    r = [int(i) for i in l.split()]
+    if r:
+      c += divide(r)
+print(c)
 
