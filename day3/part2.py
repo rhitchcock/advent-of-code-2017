@@ -35,4 +35,3 @@ def get_larger(n):
 
 with open("input.txt") as f:
   print(get_larger(int(f.readline().split()[0])))
-

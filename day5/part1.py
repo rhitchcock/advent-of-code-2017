@@ -13,4 +13,3 @@ while i < len(rs):
    i += rs[i] - 1
    n += 1
 print(n)
-

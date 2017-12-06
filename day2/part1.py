@@ -7,4 +7,3 @@ with open("input.txt") as f:
     if r:
       c += max(r) - min(r)
 print(c)
-

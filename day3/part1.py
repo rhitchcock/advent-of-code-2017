@@ -14,4 +14,3 @@ elif (i - n + a) % (s - 1) > a - 1:
   print(a + (n - (i - (s - 2) * 4 - 4) + a) % (s - 1))
 else:
   print(a + (i - n + a) % (s - 1))
-

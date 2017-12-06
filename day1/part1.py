@@ -7,4 +7,3 @@ with open("input.txt") as f:
     if c[i] == c[(i + 1) % len(c)]:
       t += int(c[i])
 print(t)
-

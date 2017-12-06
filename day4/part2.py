@@ -17,4 +17,3 @@ t = 0
 for r in rs:
   t += is_valid(r)
 print(t)
-

@@ -15,4 +15,3 @@ with open("input.txt") as f:
     if r:
       c += divide(r)
 print(c)
-
