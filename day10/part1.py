@@ -3,7 +3,7 @@
 import math
 
 def reverse_sublist(l, current_position, length):
-  for i in range(0, math.floor(length / 2)):
+  for i in range(math.floor(length / 2)):
     i1 = (current_position + i) % len(l)
     i2 = (current_position + length - i - 1) % len(l)
     l[i1], l[i2] = l[i2], l[i1]
