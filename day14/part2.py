@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+import math
+import itertools
+from queue import Queue
+
+def reverse_sublist(l, current_position, length):
+  for i in range(math.floor(length / 2)):
+    i1 = (current_position + i) % len(l)
+    i2 = (current_position + length - i - 1) % len(l)
+    l[i1], l[i2] = l[i2], l[i1]
+
+def knot_hash(string):
+  items_len = 256
+  items = list(range(items_len))
+  lengths = [ord(i) for i in string] + [17, 31, 73, 47, 23]
+  current_position = 0
+  skip_size = 0
+  for _ in range(64):
+    for length in lengths:
+      if length > items_len:
+        continue
+      reverse_sublist(items, current_position, length)
+      current_position = (current_position + length + skip_size) % items_len
+      skip_size += 1
+  dense_hash = ""
+  for i in range(items_len // 16):
+    combined = items[i * 16]
+    for j in range(1, 16):
+      combined ^= items[i * 16 + j]
+    dense_hash += "{:02x}".format(combined)
+  return dense_hash
+
+def main():
+  with open("input.txt") as f:
+    key = f.read().strip()
+  squares = set()
+  for y in range(128):
+    row = bin(int(knot_hash(key + "-" + str(y)), 16))[2:].zfill(128)
+    for x in range(128):
+      if row[x] == "1":
+        squares.add((x, y))
+  region_id = 0
+  while len(squares) > 0:
+    (x, y) = squares.pop()
+    queue = Queue()
+    queue.put((x - 1, y))
+    queue.put((x + 1, y))
+    queue.put((x, y - 1))
+    queue.put((x, y + 1))
+    while not queue.empty():
+      (x, y) = queue.get()
+      if (x, y) in squares:
+        squares.remove((x, y))
+        queue.put((x - 1, y))
+        queue.put((x + 1, y))
+        queue.put((x, y - 1))
+        queue.put((x, y + 1))
+    region_id += 1
+  print(region_id)
+
+if __name__ == "__main__":
+  main()
